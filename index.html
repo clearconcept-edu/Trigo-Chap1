@@ -1,21 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Quiz Website</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>School Quiz</h1>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Quiz</title>
 
-    <div id="quiz-container">
-        <h2 id="question"></h2>
-        <div id="choices"></div>
-        <p id="result"></p>
-        <p id="solution"></p>
-        <button id="next-button" style="display:none;">Next Question</button>
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>School Quiz</h1>
+
+        <!-- QUIZ START -->
+        <div id="quiz">
+
+            <!-- QUESTION 1 WITH IMAGE -->
+            <div class="question">
+                <p><strong>Q1.</strong> Look at the image below and answer the question:</p>
+
+                <!-- IMAGE -->
+                <img src="0a7b7488-6beb-4516-bffa-a1642b1f1922.jpg" alt="Question Image" style="width:300px; border-radius:10px; margin:10px 0;">
+
+                <p>What does this picture represent?</p>
+
+                <ul>
+                    <li><button onclick="checkAnswer(1, this)">Option A</button></li>
+                    <li><button onclick="checkAnswer(2, this)">Option B</button></li>
+                    <li><button onclick="checkAnswer(3, this)">Option C</button></li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="question">
+                <p><strong>Q2.</strong> What is the capital of India?</p>
+                <ul>
+                    <li><button onclick="checkAnswer(1, this)">Mumbai</button></li>
+                    <li><button onclick="checkAnswer(2, this)">New Delhi</button></li>
+                    <li><button onclick="checkAnswer(3, this)">Kolkata</button></li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="question">
+                <p><strong>Q3.</strong> 5 + 7 = ?</p>
+                <ul>
+                    <li><button onclick="checkAnswer(1, this)">10</button></li>
+                    <li><button onclick="checkAnswer(2, this)">12</button></li>
+                    <li><button onclick="checkAnswer(3, this)">14</button></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div id="result"></div>
     </div>
 
+    <!-- Link JS -->
     <script src="script.js"></script>
 </body>
 </html>
-
