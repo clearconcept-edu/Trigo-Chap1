@@ -1,58 +1,45 @@
-const questions = [
-    {
-        question: "What is 5 × 6?",
-        choices: ["11", "30", "20", "26"],
-        answer: 1,
-        solution: "5 × 6 = 30"
-    },
-    {
-        question: "What is H2O commonly known as?",
-        choices: ["Oxygen", "Water", "Hydrogen", "Salt"],
-        answer: 1,
-        solution: "H2O is the chemical name for water."
-    }
-];
-
-let current = 0;
-
-function loadQuestion() {
-    let q = questions[current];
-    document.getElementById("question").innerText = q.question;
-
-    let choicesDiv = document.getElementById("choices");
-    choicesDiv.innerHTML = "";
-
-    q.choices.forEach((choice, index) => {
-        let btn = document.createElement("div");
-        btn.className = "choice";
-        btn.innerText = choice;
-        btn.onclick = () => checkAnswer(index);
-        choicesDiv.appendChild(btn);
-    });
-
-    document.getElementById("result").innerText = "";
-    document.getElementById("solution").innerText = "";
-    document.getElementById("next-button").style.display = "none";
-}
-
-function checkAnswer(index) {
-    let q = questions[current];
-
-    if (index === q.answer) {
-        document.getElementById("result").innerText = "Correct!";
-    } else {
-        document.getElementById("result").innerText = "Wrong!";
-    }
-
-    document.getElementById("solution").innerText = "Solution: " + q.solution;
-    document.getElementById("next-button").style.display = "block";
-}
-
-document.getElementById("next-button").onclick = () => {
-    current++;
-    if (current >= questions.length) current = 0;
-    loadQuestion();
+// Correct answers for each question
+// Q1 → option 2, Q2 → option 2, Q3 → option 2
+// You can change these anytime!
+const correctAnswers = {
+    1: 2,
+    2: 2,
+    3: 2
 };
 
-// Load first question
-loadQuestion();
+function checkAnswer(optionClicked, button) {
+
+    // Get question block
+    const questionDiv = button.closest(".question");
+    const questionNumber = Array.from(document.querySelectorAll(".question")).indexOf(questionDiv) + 1;
+
+    // Remove old feedback if exists
+    let oldFeedback = questionDiv.querySelector(".feedback");
+    if (oldFeedback) oldFeedback.remove();
+
+    // Create feedback box
+    const feedback = document.createElement("div");
+    feedback.className = "feedback";
+    feedback.style.marginTop = "10px";
+    feedback.style.padding = "10px";
+    feedback.style.border = "1px solid #ddd";
+    feedback.style.borderRadius = "8px";
+    feedback.style.background = "#f9f9f9";
+
+    // 🟩 Correct Answer
+    if (optionClicked === correctAnswers[questionNumber]) {
+        feedback.innerHTML = `
+            <p style="color: green; font-weight: bold; font-size: 18px;">✔ Correct answer!</p>
+            <p><strong>Solution:</strong> Good job! You selected the right answer.</p>
+        `;
+    } 
+    // 🟥 Wrong Answer
+    else {
+        feedback.innerHTML = `
+            <p style="color: red; font-weight: bold; font-size: 18px;">✘ Wrong answer.</p>
+            <p><strong>Solution:</strong> The correct option is: ${correctAnswers[questionNumber]}</p>
+        `;
+    }
+
+    questionDiv.appendChild(feedback);
+}
